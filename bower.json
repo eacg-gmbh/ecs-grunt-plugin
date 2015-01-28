@@ -1,0 +1,13 @@
+{
+  "name": "ecs-grunt-plugin",
+  "description": "bower test file",
+  "homepage": "",
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "dependencies": {
+    "jquery-ui": "~1.11.2",
+    "highcharts": "~4.1.0"
+  },
+  "version": "0.0.1"
+}
