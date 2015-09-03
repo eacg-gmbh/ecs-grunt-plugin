@@ -1,6 +1,7 @@
 # ecs-grunt-plugin
+EACG Code Scan grunt plugin
 
-> Grunt plugin to trannsfer dependency information to ECS server..
+> Grunt plugin to transfer dependency information to ECS server.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -85,5 +86,5 @@ grunt.initConfig({
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
-## Release History
-_(Nothing yet)_
+## License
+[MIT](https://github.com/eacg-gmbh/ecs-grunt-plugin/blob/master/LICENSE)
