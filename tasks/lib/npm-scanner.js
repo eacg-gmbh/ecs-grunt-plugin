@@ -38,10 +38,8 @@ Scanner.prototype.scan = function scan(cb) {
                     debuglog("Project: ", data.name, data.version);
                     var dependency = self.walk(data);
                     var scan = new ScanResult(
-                        options.user,
                         options.project,
                         data.name, 'npm:' + data.name,
-                        options.apiKey,
                         dependency);
                     debuglog("result: ", JSON.stringify(scan));
                     cb(undefined, scan);

@@ -16,7 +16,7 @@ describe('ScanResult', function() {
                 root2 = new Dependency("root2", "2.0", "---"),
                 child1 = new Dependency("child1", "1.0", "---"),
                 deps = [root1, root2],
-                scanResult = new ScanResult("user", "project", "module", "moduleId", "apiKey", deps);
+                scanResult = new ScanResult("project", "module", "moduleId", deps);
 
             root1.addDependency(child1);
 
@@ -29,7 +29,7 @@ describe('ScanResult', function() {
         it('should handle dependencies as hash', function () {
             var deps = {root1: new Dependency("root1", "1.1", "---"), root2: new Dependency("root2", "2.0", "---")};
             deps.root1.addDependency(new Dependency("child1", "1.0.0", "---"));
-            var scanResult = new ScanResult("user", "project", "module", "moduleId", "apiKey", deps);
+            var scanResult = new ScanResult("project", "module", "moduleId", deps);
 
             assert.equal(scanResult.dependencies.length, 2);
             assert.equal(scanResult.dependencies[0].name, "root1");

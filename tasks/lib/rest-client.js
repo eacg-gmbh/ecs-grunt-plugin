@@ -5,7 +5,8 @@
  */
 
 var Client = require('node-rest-client').Client,
-    debuglog = (require('debuglog'))('ecs-rest-client') ;
+    debuglog = (require('debuglog'))('ecs-rest-client');
+    pckgJson = require('./../../package.json');
 
 exports.RestClient = RestClient;
 
@@ -25,7 +26,12 @@ RestClient.prototype.transfer = function transfer(scan, cb) {
     var client = new Client(options.clientOptions || {});
 
     var headers = {
-        headers: { 'Content-Type': 'application/json'  },
+        headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': pckgJson.name + '/' + pckgJson.version,
+            'X-ApiKey': options.apiKey,
+            'X-User': options.user
+        },
         data: scan
     };
     client.post(options.baseUrl + "/api/v1/scans", headers, function (data, response) {

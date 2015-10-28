@@ -6,12 +6,10 @@
 
 Dependency = require("./dependency");
 
-function ScanResult(user, project, module, moduleId, apiKey, dependencies) {
-    this.user = user;
+function ScanResult(project, module, moduleId, dependencies) {
     this.project = project;
     this.module = module;
     this.moduleId = moduleId;
-    this.apiKey = apiKey;
     this.dependencies = [];
 
 

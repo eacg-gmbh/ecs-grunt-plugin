@@ -26,10 +26,8 @@ Scanner.prototype.scan = function scan(cb) {
             try {
                 var dependency = self.walk(result);
                 var scan = new ScanResult(
-                    options.user,
                     options.project,
                     result.pkgMeta.name, 'bower:' + result.pkgMeta.name,
-                    options.apiKey,
                     dependency);
                 debuglog("result: ", JSON.stringify(scan));
                 cb(undefined, scan);
