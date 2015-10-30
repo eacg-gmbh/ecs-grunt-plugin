@@ -3,7 +3,3 @@ node_js:
   - "stable"
   - "0.12"
   
-before_script:
-  - npm install -g gulp
-  
-script: "gulp test"
