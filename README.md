@@ -1,4 +1,7 @@
 # ecs-grunt-plugin
+
+[![Build Status](https://travis-ci.org/eacg-gmbh/ecs-grunt-plugin.svg?branch=master)](https://travis-ci.org/eacg-gmbh/ecs-grunt-plugin)
+
 EACG Code Scan grunt plugin
 
 > Grunt plugin to transfer dependency information to ECS server.
