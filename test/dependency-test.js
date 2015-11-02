@@ -137,6 +137,16 @@ describe('Dependency', function() {
             assert.deepEqual(new Dependency("name", "---", new String("xxx")).key, "xxx:name");
         });
 
+        it('should extract additional repo-protocol from url', function () {
+            assert.deepEqual(new Dependency('name', 'version', "---", 'description', '---', '---', "home",
+                    "git+https://github.com/eacg-gmbh/ecs-grunt-plugin.git").repoUrl,
+                "https://github.com/eacg-gmbh/ecs-grunt-plugin.git");
+            assert.deepEqual(new Dependency('name', 'version', "---", 'description', '---', '---', "home",
+                    "svn+http://svnrepo.com/test.svn").repoUrl,
+                "http://svnrepo.com/test.svn");
+        });
+
+
         it('should set defaults', function () {
             var dep = new Dependency("name", "version", "---");
             assert.deepEqual(dep.versions, ["version"]);

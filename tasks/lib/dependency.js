@@ -16,7 +16,7 @@ function Dependency(name, version, keyPrefix, description, priv, licenses, homep
     this.private = !!priv;
     this.licenses = convertLicenses(licenses);
     this.homepageUrl = homepageUrl;
-    this.repoUrl = repoUrl;
+    this.repoUrl = convertRepoUrl(repoUrl);
     this.dependencies = [];
 
     Object.defineProperty(this, 'versions', {
@@ -82,6 +82,20 @@ Dependency.getFirstByName = function(container, dependency) {
 
 module.exports = Dependency;
 
+
+function convertRepoUrl(url) {
+    var prefixes=['git+', 'svn+'];
+
+    if(url && typeof url === 'string' && url.length > 0) {
+        for(var i = 0; i < prefixes.length; i++) {
+            if (url.indexOf(prefixes[i]) === 0) {
+                return url.substring(prefixes[i].length);
+            }
+        }
+        return url;
+    }
+    return null;
+}
 
 function checkStr(str, name) {
     if(str instanceof String) {
