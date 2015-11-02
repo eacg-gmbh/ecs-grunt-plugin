@@ -1,7 +1,6 @@
 {
   "name": "ecs-grunt-plugin",
   "description": "bower test file",
-  "homepage": "",
   "keywords": [],
   "author": "",
   "private": true,
@@ -9,5 +8,11 @@
     "jquery-ui": "~1.11.2",
     "highcharts": "~4.1.0"
   },
-  "version": "0.0.1"
+  "version": "0.0.2",
+  "license": "MIT",
+  "homepage": "https://github.com/eacg-gmbh/ecs-grunt-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/foo/bar.git"
+  }
 }

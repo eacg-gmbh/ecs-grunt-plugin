@@ -15,6 +15,7 @@ exports.Scanner = Scanner;
 
 function Scanner(options) {
     this.options = options;
+    this.name = 'ecs-bower-scanner';
 }
 
 Scanner.prototype.scan = function scan(cb) {
@@ -53,10 +54,10 @@ Scanner.prototype.walk = function walk(bowerDependency, level) {
     level = level || 0;
 
     // Tests missing
-    //if(opts && opts.exclude && (opts.exclude instanceof Array && opts.exclude.indexOf(dependency.name) >= 0 || opts.exclude === dependency.name)) {
-    //    debuglog("Skipping blacklisted: ", dependency.name);
-    //    return dependencies;
-    //}
+    if(opts.exclude instanceof Array && opts.exclude.indexOf(bowerDependency.pkgMeta.name) >= 0 || opts.exclude === bowerDependency.pkgMeta.name) {
+        debuglog("Skipping blacklisted: ", bowerDependency.pkgMeta.name);
+        return null;
+    }
 
     printDependency(bowerDependency.pkgMeta, level);
 
@@ -72,7 +73,10 @@ Scanner.prototype.walk = function walk(bowerDependency, level) {
             } else {
                 var childDependency = bowerDependency.dependencies[val];
                 if(childDependency.pkgMeta) {
-                    dependency.addDependency(self.walk(childDependency, level + 1));
+                    var child = self.walk(childDependency, level + 1);
+                    if(child) {
+                        dependency.addDependency(child);
+                    }
                 } else {
                     if(opts.continueOnMissingDependencies === true) {
                         debuglog("Skipping missing (not installed?) dependency: ", val);

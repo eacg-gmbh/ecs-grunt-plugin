@@ -15,6 +15,7 @@ exports.Scanner = Scanner;
 
 function Scanner(options) {
     this.options = options;
+    this.name = 'ecs-npm-scanner';
 }
 
 Scanner.prototype.scan = function scan(cb) {
@@ -61,7 +62,7 @@ Scanner.prototype.walk = function walk(npmDependency, level) {
 
     printDependency(npmDependency, level);
     // Tests missing
-    if(opts && opts.exclude && (opts.exclude instanceof Array && opts.exclude.indexOf(npmDependency.name) >= 0 || opts.exclude === npmDependency.name)) {
+    if(opts.exclude instanceof Array && opts.exclude.indexOf(npmDependency.name) >= 0 || opts.exclude === npmDependency.name) {
         debuglog("Skipping blacklisted: ", npmDependency.name);
         return null;
     }
@@ -97,7 +98,8 @@ function printDependency(dep, level) {
     debuglog(fill + "Private: ", dep.private);
     debuglog(fill + "Description: ", dep.description);
     if(dep.repository) {
-        debuglog(fill + "Repsitory: ", dep.repository.type, dep.repository.url);
+        debuglog(fill + "Repsitory type:", dep.repository.type);
+        debuglog(fill + "Repsitory url:", dep.repository.url);
     }
     debuglog(fill + "Homdepage: ", dep.homepage);
 }
