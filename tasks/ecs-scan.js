@@ -12,13 +12,23 @@ function extend(target, options, keys) {
     return a;
 }
 
+function printableOptions(options) {
+    var printable = {};
+    for(var key in options) {
+        if(options.hasOwnProperty(key)){
+            printable[key] = key === 'apiKey' ? 'xxx-xxx' : options[key];
+        }
+    }
+    return printable;
+}
+
 module.exports = function (grunt) {
 
     grunt.registerTask("ecs-scan", function () {
         this.requiresConfig('ecs-scan.options.user', 'ecs-scan.options.apiKey');
 
         var options = this.options({
-            baseUrl: 'http://localhost:3000',
+            baseUrl: 'https://ecs-app.eacg.de',
         });
 
         var scanner = [], Scanner;
@@ -51,7 +61,7 @@ module.exports = function (grunt) {
 
             scanner.forEach(function (scanner) {
                 if (options.verbose) {
-                    grunt.log.writeln("ecs-scan:" + scanner.name + " starting, params: " + JSON.stringify(scanner.options));
+                    grunt.log.writeln("ecs-scan:" + scanner.name + " starting, params: " + JSON.stringify(printableOptions(scanner.options)));
                 } else {
                     grunt.log.writeln("ecs-scan:" + scanner.name + " starting...");
                 }

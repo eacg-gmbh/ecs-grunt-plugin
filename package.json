@@ -1,7 +1,7 @@
 {
   "name": "ecs-grunt-plugin",
   "description": "Grunt plugin to trannsfer dependency information to ECS server.",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "private": false,
   "homepage": "https://ecs.eacg.de",
   "author": {
@@ -37,6 +37,6 @@
     "test": "node_modules/grunt-simple-mocha/node_modules/mocha/bin/mocha test"
   },
   "keywords": [
-    "gruntplugin"
+    "grunt", "plugin", "opensource", "dependency-analysis"
   ]
 }

@@ -22,11 +22,6 @@ module.exports = function (grunt) {
                 user: credentials.userName,
                 apiKey: credentials.apiKey,
                 simulate: false,
-                baseUrl: 'http://localhost:3000',
-                clientOptions: {
-                    user: credentials.basicAuth.user,
-                    password: credentials.basicAuth.password
-                },
                 verbose: true
 
             }
