@@ -1,6 +1,6 @@
 {
   "name": "ecs-grunt-plugin",
-  "description": "Grunt plugin to trannsfer dependency information to ECS server.",
+  "description": "Grunt plugin to transfer dependency information to ECS server.",
   "version": "0.1.0",
   "private": false,
   "homepage": "https://ecs.eacg.de",
