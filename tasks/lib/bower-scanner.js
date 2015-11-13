@@ -59,6 +59,9 @@ Scanner.prototype.walk = function walk(bowerDependency, level) {
         return null;
     }
 
+    // workaround, if bower version is undefined (e.g. because no github release exists), use 0.0.0 as default
+    bowerDependency.pkgMeta.version = bowerDependency.pkgMeta.version || '0.0.0';
+
     printDependency(bowerDependency.pkgMeta, level);
 
     var dependency = new Dependency(bowerDependency.pkgMeta.name,
