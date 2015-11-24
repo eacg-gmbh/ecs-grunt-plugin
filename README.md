@@ -11,8 +11,8 @@ EACG Code Scan grunt plugin
 
 > Grunt plugin to transfer dependency information to ECS server.
 
-## Getting Started
-See [installation instructions](https://ecs.eacg.de/install/#npm)
+## Installation
+The installation instructions will be provided as part of the [ECS web-application](https://ecs.eacg.de/install/).
 
 ## License
 [MIT](https://github.com/eacg-gmbh/ecs-grunt-plugin/blob/master/LICENSE)
