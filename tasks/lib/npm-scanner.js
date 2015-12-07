@@ -60,21 +60,31 @@ Scanner.prototype.walk = function walk(npmDependency, level) {
     var opts = this.options || {};
     level = level || 0;
 
-    printDependency(npmDependency, level);
-    // Tests missing
-    if(opts.exclude instanceof Array && opts.exclude.indexOf(npmDependency.name) >= 0 || opts.exclude === npmDependency.name) {
-        debuglog("Skipping blacklisted: ", npmDependency.name);
-        return null;
+    function log() {
+        var args = [].slice.call(arguments, 0);
+        if(opts.verbose) {
+            console.log.apply(this, args);
+        } else {
+            debuglog.apply(this, args);
+        }
     }
+
+    printDependency(npmDependency, level);
 
     var dependency= new Dependency(npmDependency.name, npmDependency.version, "npm", npmDependency.description, npmDependency.private, npmDependency.licenses || npmDependency.license,
         npmDependency.homepage, npmDependency.repository ? npmDependency.repository.url : undefined);
 
     if(npmDependency.dependencies) {
         Object.getOwnPropertyNames(npmDependency.dependencies).forEach(function(val) {
+            // check for dev dependencies on level 0
             if(level === 0 && !opts.includeDevDependencies && npmDependency.devDependencies && npmDependency.devDependencies[val]) {
-                debuglog("Skipping level 0, devDependency: ", val);
+                log("Skipping level 0 devDependency: ", val);
+
+            // check for blacklisted dependencies on level 0
+            } else if(level === 0 && (opts.exclude instanceof Array && opts.exclude.indexOf(val) >= 0 || opts.exclude === val)) {
+                log("Skipping level 0 blacklisted: ", val);
             } else {
+                log("Adding dependency, level:", level, val);
                 var child = self.walk(npmDependency.dependencies[val], level + 1);
                 if(child) {
                     dependency.addDependency(child);

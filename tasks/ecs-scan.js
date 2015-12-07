@@ -3,13 +3,12 @@
  *
  * SPDX-License-Identifier:	MIT
  */
-var GLOBAL_KEYS = ['baseUrl', 'user', 'apiKey', 'clientOptions'];
+var GLOBAL_KEYS = ['baseUrl', 'user', 'apiKey', 'clientOptions', 'verbose'];
 function extend(target, options, keys) {
-    var a = Object.create(target);
     keys.forEach(function(key) {
-        !(key in target) && (key in options) && (a[key] = options[key]);
+        !(key in target) && (key in options) && (target[key] = options[key]);
     });
-    return a;
+    return target;
 }
 
 function printableOptions(options) {

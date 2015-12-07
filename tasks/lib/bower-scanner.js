@@ -53,10 +53,13 @@ Scanner.prototype.walk = function walk(bowerDependency, level) {
     var opts = this.options || {};
     level = level || 0;
 
-    // Tests missing
-    if(opts.exclude instanceof Array && opts.exclude.indexOf(bowerDependency.pkgMeta.name) >= 0 || opts.exclude === bowerDependency.pkgMeta.name) {
-        debuglog("Skipping blacklisted: ", bowerDependency.pkgMeta.name);
-        return null;
+    function log() {
+        var args = [].slice.call(arguments, 0);
+        if(opts.verbose) {
+            console.log.apply(this, args);
+        } else {
+            debuglog.apply(this, args);
+        }
     }
 
     // workaround, if bower version is undefined (e.g. because no github release exists), use 0.0.0 as default
@@ -71,9 +74,15 @@ Scanner.prototype.walk = function walk(bowerDependency, level) {
 
     if(bowerDependency.dependencies) {
         Object.getOwnPropertyNames(bowerDependency.dependencies).forEach(function(val) {
+            // check for dev dependencies on level 0
             if (level === 0 && !opts.includeDevDependencies && bowerDependency.devDependencies && bowerDependency.devDependencies[val]) {
-                debuglog("Skipping level 0, devDependency: ", val);
+                log("Skipping level 0 devDependency: ", val);
+
+            // check for blacklisted dependencies on level 0
+            } else if(level === 0 && (opts.exclude instanceof Array && opts.exclude.indexOf(val) >= 0 || opts.exclude === val)) {
+                log("Skipping level 0 blacklisted: ", val);
             } else {
+                log("Adding dependency, level:", level, val);
                 var childDependency = bowerDependency.dependencies[val];
                 if(childDependency.pkgMeta) {
                     var child = self.walk(childDependency, level + 1);
@@ -82,7 +91,7 @@ Scanner.prototype.walk = function walk(bowerDependency, level) {
                     }
                 } else {
                     if(opts.continueOnMissingDependencies === true) {
-                        debuglog("Skipping missing (not installed?) dependency: ", val);
+                        log("Skipping missing (not installed?) dependency: ", val);
                     } else {
                         throw new Error("Component '" + val +"' missing. Try to execute 'bower install' first");
                     }
