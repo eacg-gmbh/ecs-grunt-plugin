@@ -14,16 +14,13 @@ module.exports = function (grunt) {
         'ecs-scan': {
             options: {
                 npm: {
-                    project: 'CodeScanNPM'
-                },
-                bower:{
-                    project: 'CodeScanBower'
+                    project: 'ECS-grunt-plugin'
                 },
                 user: credentials.userName,
                 apiKey: credentials.apiKey,
                 simulate: false,
-                verbose: true
-
+                verbose: true,
+                baseUrl: "http://localhost:3000"
             }
         },
         simplemocha: {

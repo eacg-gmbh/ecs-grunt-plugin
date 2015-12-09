@@ -8,10 +8,10 @@ var semver = require("semver");
 
 function Dependency(name, version, keyPrefix, description, priv, licenses, homepageUrl, repoUrl) {
 
-    var versions = [checkStr(version, "version")];
-
     this.name = checkStr(name, "name");
-    this.key = checkStr(keyPrefix, "key-prefix") + ':' + this.name;
+    var versions = [checkStr(version, "version", this.name)];
+
+    this.key = checkStr(keyPrefix, "key-prefix", this.name) + ':' + this.name;
     this.description = description;
     this.private = !!priv;
     this.licenses = convertLicenses(licenses);
@@ -97,12 +97,16 @@ function convertRepoUrl(url) {
     return null;
 }
 
-function checkStr(str, name) {
+function checkStr(str, name, info) {
     if(str instanceof String) {
         str = str.valueOf(); // convert to primitive
     }
     if(typeof str != 'string' || str.length == 0) {
-        throw new Error((name || "parameter") + " should be given");
+        var msg = (name || "parameter") + " should be given.";
+        if(info){
+            msg = msg + " [" + info + "]";
+        }
+        throw new Error(msg);
     }
     return str;
 }

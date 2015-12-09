@@ -4,8 +4,8 @@
  * SPDX-License-Identifier:	MIT
  */
 
-var Client = require('node-rest-client').Client,
-    debuglog = (require('debuglog'))('ecs-rest-client');
+var request = require('request');
+debuglog = (require('debuglog'))('ecs-rest-client'),
     pckgJson = require('./../../package.json');
 
 exports.RestClient = RestClient;
@@ -23,37 +23,39 @@ RestClient.prototype.transfer = function transfer(scan, cb) {
     var options = this.options;
     debuglog("transfer started, options:", options);
 
-    var client = new Client(options.clientOptions || {});
-
-    var headers = {
-        headers: {
-            'Content-Type': 'application/json',
-            'User-Agent': pckgJson.name + '/' + pckgJson.version,
-            'X-ApiKey': options.apiKey,
-            'X-User': options.user
-        },
-        data: scan
+    var reqOpts = options.requestOptions || {};
+    reqOpts.method = 'POST';
+    reqOpts.uri = options.baseUrl + "/api/v1/scans";
+    reqOpts.headers = {
+        'Content-Type': 'application/json',
+        'User-Agent': pckgJson.name + '/' + pckgJson.version,
+        'X-ApiKey': options.apiKey,
+        'X-User': options.user
     };
-    client.post(options.baseUrl + "/api/v1/scans", headers, function (data, response) {
-        if (response && response.statusCode === 201) {
-            cb(null, data);
+    reqOpts.json =  true;
+    reqOpts.body =  scan;
+
+    request(reqOpts, function (error, response, body) {
+        if (!error && response && response.statusCode === 201) {
+            cb(null, body);
         } else {
-            cb({message: "unexpected response: " + response.statusCode}, data);
+            debuglog("unexpected response: error=", error, "response=", response);
+            var result = {
+                message: "unexpected response"
+            };
+            if (error) {
+                result.error = error;
+            }
+            if (response && response.statusCode) {
+                result.code = response.statusCode;
+            }
+            if (body) {
+                result.body = body;
+            }
+            if (!result.code && !error.error) {
+                result.response = JSON.stringify(response);
+            }
+            cb(result);
         }
-    }).on('error', function(err) {
-        debuglog("Error callback:", err);
-        cb(new Error("error during post: " + err.code));
-    }).on('requestTimeout',function(req){
-        debuglog("request has expired");
-        req.abort();
-        cb(new Error("request expired"));
-    }).on('responseTimeout',function(res){
-        debuglog("response has expired");
-        cb(new Error("response expired"));
     });
 };
-
-
-
-
-

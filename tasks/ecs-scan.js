@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier:	MIT
  */
-var GLOBAL_KEYS = ['baseUrl', 'user', 'apiKey', 'clientOptions', 'verbose'];
+var GLOBAL_KEYS = ['baseUrl', 'user', 'apiKey', 'requestOptions', 'verbose'];
 function extend(target, options, keys) {
     keys.forEach(function(key) {
         !(key in target) && (key in options) && (target[key] = options[key]);
@@ -76,10 +76,10 @@ module.exports = function (grunt) {
                         } else {
                             scanner.transfer(data, function (err, data) {
                                 if (err) {
-                                    grunt.log.error("ecs-scan:" + scanner.name + " error transferring scan:" + err.message);
+                                    grunt.log.error("ecs-scan:" + scanner.name + " error transferring scan:" + JSON.stringify(err));
                                     scanDone(false);
                                 } else {
-                                    grunt.log.writeln("ecs-scan:" + scanner.name + " successfully created scan to server:" + JSON.stringify(data));
+                                    grunt.log.writeln("ecs-scan:" + scanner.name + " successfully transferred scan to server:" + JSON.stringify(data));
                                     scanDone(true);
                                 }
                             });
