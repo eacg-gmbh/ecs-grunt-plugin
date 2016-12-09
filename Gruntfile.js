@@ -16,11 +16,13 @@ module.exports = function (grunt) {
                 npm: {
                     project: 'ECS-grunt-plugin'
                 },
+                bower: {
+                    project: 'ECS-grunt-plugin'
+                },
                 user: credentials.userName,
                 apiKey: credentials.apiKey,
                 simulate: false,
                 verbose: true,
-                baseUrl: "http://localhost:3000"
             }
         },
         simplemocha: {
