@@ -76,6 +76,7 @@ Scanner.prototype.walk = function walk(npmDependency, level) {
 
     if(npmDependency.dependencies) {
         Object.getOwnPropertyNames(npmDependency.dependencies).forEach(function(val) {
+            var npmChild = npmDependency.dependencies[val];
             // check for dev dependencies on level 0
             if(level === 0 && !opts.includeDevDependencies && npmDependency.devDependencies && npmDependency.devDependencies[val]) {
                 log("Skipping level 0 devDependency: ", val);
@@ -83,9 +84,16 @@ Scanner.prototype.walk = function walk(npmDependency, level) {
             // check for blacklisted dependencies on level 0
             } else if(level === 0 && (opts.exclude instanceof Array && opts.exclude.indexOf(val) >= 0 || opts.exclude === val)) {
                 log("Skipping level 0 blacklisted: ", val);
+            } else if(npmChild.missing === true) {
+                if(npmChild.optional === true) {
+                    log("Ignoring missing, optional dependency: ", npmDependency);
+                } else {
+                    console.log("==== Warning: required dependency '%s' not installed and therefore ignored.", val);
+                    console.log("==== Please execute 'npm install' to install the missing component.");
+                }
             } else {
                 log("Adding dependency, level:", level, val);
-                var child = self.walk(npmDependency.dependencies[val], level + 1);
+                var child = self.walk(npmChild, level + 1);
                 if(child) {
                     dependency.addDependency(child);
                 }
