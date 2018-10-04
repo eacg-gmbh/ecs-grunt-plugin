@@ -15,5 +15,10 @@ TrustSource grunt plugin
 ## Installation
 Run: `npm install ecs-grunt-plugin`
 
+## Changelog
+
+#### 0.1.6
+- Updated plugin with `app.trustsource.io` information
+
 ## License
 [MIT](https://github.com/eacg-gmbh/ecs-grunt-plugin/blob/master/LICENSE)
