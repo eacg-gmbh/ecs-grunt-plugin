@@ -1,4 +1,4 @@
-# ecs-grunt-plugin
+# TrustSource ecs-grunt-plugin
 
 [![Travis build status](https://travis-ci.org/eacg-gmbh/ecs-grunt-plugin.svg?branch=master)](https://travis-ci.org/eacg-gmbh/ecs-grunt-plugin)
 [![Version](https://img.shields.io/npm/v/ecs-grunt-plugin.svg)](http://npm.im/ecs-grunt-plugin)
@@ -8,12 +8,12 @@
 
 [![npm package](https://nodei.co/npm/ecs-grunt-plugin.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/ecs-grunt-plugin/)
 
-EACG Code Scan grunt plugin
+TrustSource grunt plugin
 
-> Grunt plugin to transfer dependency information to ECS server.
+> Grunt plugin to transfer dependency information to TrustSource server.
 
 ## Installation
-The installation instructions will be provided as part of the [ECS web-application](https://ecs.eacg.de/install/).
+Run: `npm install ecs-grunt-plugin`
 
 ## License
 [MIT](https://github.com/eacg-gmbh/ecs-grunt-plugin/blob/master/LICENSE)

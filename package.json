@@ -1,9 +1,9 @@
 {
   "name": "ecs-grunt-plugin",
-  "description": "Grunt plugin to transfer dependency information to ECS server.",
-  "version": "0.1.5",
+  "description": "Grunt plugin to transfer dependency information to TrustSource server.",
+  "version": "0.1.6",
   "private": false,
-  "homepage": "https://ecs.eacg.de",
+  "homepage": "https://app.trustsource.io/",
   "author": {
     "name": "Gerhard Dickescheid",
     "email": "gdd@eacg.de"

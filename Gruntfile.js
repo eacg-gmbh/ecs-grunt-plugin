@@ -22,7 +22,7 @@ module.exports = function (grunt) {
                 user: credentials.userName,
                 apiKey: credentials.apiKey,
                 simulate: false,
-                verbose: true,
+                verbose: true
             }
         },
         simplemocha: {
