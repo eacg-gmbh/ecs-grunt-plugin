@@ -17,6 +17,9 @@ Run: `npm install ecs-grunt-plugin`
 
 ## Changelog
 
+#### 0.1.7
+- Fix mocha test script
+
 #### 0.1.6
 - Updated plugin with `app.trustsource.io` information
 

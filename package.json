@@ -1,7 +1,7 @@
 {
   "name": "ecs-grunt-plugin",
   "description": "Grunt plugin to transfer dependency information to TrustSource server.",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": false,
   "homepage": "https://app.trustsource.io/",
   "author": {
@@ -31,7 +31,7 @@
     "nock": "^3.4.0"
   },
   "scripts": {
-    "test": "node_modules/grunt-simple-mocha/node_modules/mocha/bin/mocha test"
+    "test": "mocha test"
   },
   "keywords": [
     "grunt",
