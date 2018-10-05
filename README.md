@@ -17,6 +17,9 @@ Run: `npm install ecs-grunt-plugin`
 
 ## Changelog
 
+#### 0.1.8
+- Update travis config
+
 #### 0.1.7
 - Fix mocha test script
 
